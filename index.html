@@ -586,7 +586,7 @@
             <p class="hero-subtitle">Cursos gamificados para desenvolvimento profissional de pessoas trans e travestis</p>
             <div class="hero-actions">
                 <button class="btn btn-primary" id="start-learning">Começar jornada</button>
-                <button class="btn btn-outline">Ver meu progresso</button>
+                <button class="btn btn-outline" id="view-progress">Ver meu progresso</button>
             </div>
         </div>
     </section>
@@ -952,6 +952,14 @@
             // Close login modal when X is clicked
             document.querySelector('#login-modal .modal-close').addEventListener('click', function() {
                 document.getElementById('login-modal').style.display = 'none';
+            });
+
+            // "Ver meu progresso" button functionality
+            document.querySelector('.hero-actions .btn-outline').addEventListener('click', function() {
+                window.scrollTo({
+                    top: document.getElementById('profile').offsetTop - 80,
+                    behavior: 'smooth'
+                });
             });
 
             // Start learning button
