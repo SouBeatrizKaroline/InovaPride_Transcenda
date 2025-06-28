@@ -934,16 +934,24 @@
                 modal.style.display = 'none';
             });
 
-            // Close when clicking outside modal
+            // Close when clicking outside modals
             window.addEventListener('click', function(event) {
                 if (event.target === modal) {
                     modal.style.display = 'none';
+                }
+                if (event.target === document.getElementById('login-modal')) {
+                    document.getElementById('login-modal').style.display = 'none';
                 }
             });
 
             // Login button functionality
             document.querySelector('.btn-primary').addEventListener('click', function() {
                 document.getElementById('login-modal').style.display = 'flex';
+            });
+
+            // Close login modal when X is clicked
+            document.querySelector('#login-modal .modal-close').addEventListener('click', function() {
+                document.getElementById('login-modal').style.display = 'none';
             });
 
             // Start learning button
