@@ -530,6 +530,37 @@
             background-color: var(--success);
             color: white;
         }
+
+        /* Login Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-footer {
+            margin-top: 1rem;
+            text-align: center;
+            color: var(--gray);
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -910,6 +941,11 @@
                 }
             });
 
+            // Login button functionality
+            document.querySelector('.btn-primary').addEventListener('click', function() {
+                document.getElementById('login-modal').style.display = 'flex';
+            });
+
             // Start learning button
             document.getElementById('start-learning').addEventListener('click', function() {
                 const firstTrack = document.querySelector('.track-start');
@@ -931,6 +967,25 @@
             }, 500);
         });
     </script>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 class="modal-title">Entrar na Transcenda</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Entrar</button>
+                <p class="form-footer">Não tem uma conta? <a href="#" id="show-register">Cadastre-se</a></p>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
-
