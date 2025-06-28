@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcenda - Crescimento profissional para pessoas trans</title>
+    <style>
+        :root {
+            --primary: #7B61FF;
+            --primary-dark: #5E41FF;
+            --secondary: #FF55B8;
+            --accent: #FFAA5E;
+            --light: #F8F9FA;
+            --dark: #2D3748;
+            --success: #48BB78;
+            --warning: #ED8936;
+            --error: #E53E3E;
+            --gray: #718096;
+            --light-gray: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .hero {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .filters {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .btn-outline.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .tracks-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .track-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .track-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .track-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .track-content {
+            padding: 1.5rem;
+        }
+
+        .track-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .track-title {
+            font-size: 1.25rem;
+            color: var(--dark);
+        }
+
+        .track-difficulty {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            background-color: var(--light-gray);
+        }
+
+        .track-description {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .track-progress {
+            margin-top: 1rem;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: var(--light-gray);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 3px;
+            width: 0;
+            transition: width 0.3s;
+        }
+
+        .track-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .track-xp {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .xp-icon {
+            color: var(--accent);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-level {
+            font-size: 0.9rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .level-progress {
+            flex: 1;
+            height: 4px;
+            background-color: var(--light-gray);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .level-progress-fill {
+            height: 100%;
+            background-color: var(--success);
+            width: 0;
+        }
+
+        .badges-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        .badge[data-badge]::after {
+            content: attr(data-badge);
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-title {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .lesson-item {
+            padding: 1rem;
+            border-radius: 5px;
+            background-color: var(--light);
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lesson-item:hover {
+            background-color: #e9e9e9;
+        }
+
+        .lesson-item.completed {
+            border-left: 4px solid var(--success);
+        }
+
+        .lesson-item.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .lesson-status {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .lesson-item.completed .lesson-status {
+            background-color: var(--success);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">T</div>
+                <a href="#" class="logo-text">Transcenda</a>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Início</a>
+                <a href="#tracks" class="nav-link">Trilhas</a>
+                <a href="#profile" class="nav-link">Perfil</a>
+                <a href="#" class="nav-link">Sobre</a>
+                <button class="btn btn-primary">Entrar</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">Explore Nossas Trilhas de Aprendizado</h1>
+            <p class="hero-subtitle">Cursos gamificados para desenvolvimento profissional de pessoas trans e travestis</p>
+            <div class="hero-actions">
+                <button class="btn btn-primary" id="start-learning">Começar jornada</button>
+                <button class="btn btn-outline">Ver meu progresso</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="profile">
+        <div class="profile-section">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f96da549-1392-4252-a2c5-e1c77ff4bb64.png" alt="Avatar de pessoa trans sorrindo com fundo colorido" class="avatar" />
+            <div class="profile-info">
+                <h3 class="profile-name">Alex Silva</h3>
+                <div class="profile-level">
+                    <span>Nível 2</span>
+                    <div class="level-progress">
+                        <div class="level-progress-fill" style="width: 45%"></div>
+                    </div>
+                    <span>45%</span>
+                </div>
+            </div>
+            <div class="badges-container">
+                <div class="badge" data-badge="3">🏆</div>
+                <div class="badge">⭐</div>
+                <div class="badge">🎯</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Minhas Conquistas</h2>
+        <div class="tracks-container">
+            <div class="track-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6bab0fff-4f24-43a2-8428-9b583d36bb24.png" alt="Workshop sobre currículos com diversas pessoas trans em uma sala" class="track-image" />
+                <div class="track-content">
+                    <h3 class="track-title">Currículo Inclusivo</h3>
+                    <p class="track-description">Aprenda a criar um currículo que destaque suas habilidades sem expor sua identidade antes do momento apropriado.</p>
+                    <div class="track-progress">
+                        <div class="progress-info">
+                            <span>Progresso</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="track-footer">
+                        <span class="track-xp">
+                            <span class="xp-icon">✨</span>
+                            <span>150/200 XP</span>
+                        </span>
+                        <button class="btn btn-primary btn-small track-continue" data-track="resume">Continuar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="track-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/47ff0744-e44d-463c-865b-aa8adac386db.png" alt="Pessoas trans em uma entrevista de emprego com ambiente profissional" class="track-image" />
+                <div class="track-content">
+                    <h3 class="track-title">Entrevistas de Emprego</h3>
+                    <p class="track-description">Dominando o processo seletivo e respondendo a perguntas sobre identidade de gênero com confiança.</p>
+                    <div class="track-progress">
+                        <div class="progress-info">
+                            <span>Progresso</span>
+                            <span>25%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25%"></div>
+                        </div>
+                    </div>
+                    <div class="track-footer">
+                        <span class="track-xp">
+                            <span class="xp-icon">✨</span>
+                            <span>50/200 XP</span>
+                        </span>
+                        <button class="btn btn-primary btn-small track-continue" data-track="interview">Continuar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="tracks">
+        <h2 class="section-title">Trilhas de Aprendizado</h2>
+        <div class="filters">
+            <button class="btn btn-outline active">Todas</button>
+            <button class="btn btn-outline">Em andamento</button>
+            <button class="btn btn-outline">Não iniciadas</button>
+            <button class="btn btn-outline">Completas</button>
+        </div>
+        <div class="tracks-container">
+            <div class="track-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a651185d-2e0b-4cdc-821b-a13da2a6e13c.png" alt="Mundo profissional digital com ícones de redes sociais e computadores" class="track-image" />
+                <div class="track-content">
+                    <div class="track-header">
+                        <h3 class="track-title">Networking Digital</h3>
+                        <span class="track-difficulty">Fácil</span>
+                    </div>
+                    <p class="track-description">Construa uma rede profissional online autêntica e segura para pessoas trans.</p>
+                    <div class="track-progress">
+                        <div class="progress-info">
+                            <span>Progresso</span>
+                            <span>0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="track-footer">
+                        <span class="track-xp">
+                            <span class="xp-icon">✨</span>
+                            <span>0/250 XP</span>
+                        </span>
+                        <button class="btn btn-primary btn-small track-start" data-track="networking">Começar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="track-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c52f0d1d-5ec9-442e-b7d0-e21564a68fc2.png" alt="Pessoa trans ensinando outras sobre direitos trabalhistas em um flipchart" class="track-image" />
+                <div class="track-content">
+                    <h3 class="track-title">Direitos Trabalhistas</h3>
+                    <p class="track-description">Conheça seus direitos e como agir em casos de discriminação no ambiente profissional.</p>
+                    <div class="track-progress">
+                        <div class="progress-info">
+                            <span>Progresso</span>
+                            <span>0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="track-footer">
+                        <span class="track-xp">
+                            <span class="xp-icon">✨</span>
+                            <span>0/300 XP</span>
+                        </span>
+                        <button class="btn btn-primary btn-small track-start" data-track="rights">Começar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="track-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f8cd8adf-a20e-4fdd-a935-cca0cdcf0447.png" alt="Pessoa não-binária apresentando um projeto para colegas diversos" class="track-image" />
+                <div class="track-content">
+                    <h3 class="track-title">Comunicação Assertiva</h3>
+                    <p class="track-description">Desenvolva habilidades para se expressar com clareza e confiança no ambiente profissional.</p>
+                    <div class="track-progress">
+                        <div class="progress-info">
+                            <span>Progresso</span>
+                            <span>0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="track-footer">
+                        <span class="track-xp">
+                            <span class="xp-icon">✨</span>
+                            <span>0/200 XP</span>
+                        </span>
+                        <button class="btn btn-primary btn-small track-start" data-track="communication">Começar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Transcenda</h3>
+                <ul>
+                    <li><a href="#">Sobre nós</a></li>
+                    <li><a href="#">Equipe</a></li>
+                    <li><a href="#">Parceiros</a></li>
+                    <li><a href="#">Trabalhe conosco</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Recursos</h3>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Materiais gratuitos</a></li>
+                    <li><a href="#">Mentorias</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Termos de uso</a></li>
+                    <li><a href="#">Política de privacidade</a></li>
+                    <li><a href="#">Acessibilidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contato</h3>
+                <ul>
+                    <li><a href="#">suporte@transcenda.org</a></li>
+                    <li><a href="#">(21) 98765-4321</a></li>
+                    <li>
+                        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                            <a href="#" style="font-size: 1.5rem;">📱</a>
+                            <a href="#" style="font-size: 1.5rem;">📘</a>
+                            <a href="#" style="font-size: 1.5rem;">📸</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2023 Transcenda. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Aulas -->
+    <div class="modal" id="lesson-modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 class="modal-title" id="modal-track-title">Trilha de Aprendizado</h2>
+            <div id="lesson-list">
+                <div class="lesson-item completed">
+                    <span>1. Introdução à trilha</span>
+                    <div class="lesson-status">✓</div>
+                </div>
+                <div class="lesson-item completed">
+                    <span>2. Identificando suas habilidades</span>
+                    <div class="lesson-status">✓</div>
+                </div>
+                <div class="lesson-item">
+                    <span>3. Estruturando seu currículo</span>
+                    <div class="lesson-status">3</div>
+                </div>
+                <div class="lesson-item locked">
+                    <span>4. Linguagem inclusiva</span>
+                    <div class="lesson-status">🔒</div>
+                </div>
+                <div class="lesson-item locked">
+                    <span>5. Revisão final</span>
+                    <div class="lesson-status">🔒</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal functionality
+            const modal = document.getElementById('lesson-modal');
+            const modalTitle = document.getElementById('modal-track-title');
+            const closeModal = document.querySelector('.modal-close');
+            const trackButtons = document.querySelectorAll('.track-continue, .track-start');
+            
+            // Track data for modal
+            const tracks = {
+                'resume': {
+                    title: 'Currículo Inclusivo',
+                    lessons: [
+                        {title: 'Introdução à trilha', completed: true},
+                        {title: 'Identificando suas habilidades', completed: true},
+                        {title: 'Estruturando seu currículo', completed: false},
+                        {title: 'Linguagem inclusiva', completed: false},
+                        {title: 'Revisão final', completed: false}
+                    ]
+                },
+                'interview': {
+                    title: 'Entrevistas de Emprego',
+                    lessons: [
+                        {title: 'Preparação para entrevistas', completed: true},
+                        {title: 'Perguntas sobre identidade de gênero', completed: false},
+                        {title: 'Estudos de caso', completed: false},
+                        {title: 'Simulação prática', completed: false},
+                        {title: 'Feedback e melhoria', completed: false}
+                    ]
+                },
+                'networking': {
+                    title: 'Networking Digital',
+                    lessons: [
+                        {title: 'Criando um perfil profissional', completed: false},
+                        {title: 'Conectando-se com aliados', completed: false},
+                        {title: 'Participando de comunidades', completed: false},
+                        {title: 'Mantendo sua segurança online', completed: false},
+                        {title: 'Engajamento estratégico', completed: false}
+                    ]
+                },
+                'rights': {
+                    title: 'Direitos Trabalhistas',
+                    lessons: [
+                        {title: 'Legislação antidiscriminação', completed: false},
+                        {title: 'Documentação e processos', completed: false},
+                        {title: 'Acompanhando casos', completed: false},
+                        {title: 'Recursos e apoio', completed: false},
+                        {title: 'Advocacia profissional', completed: false}
+                    ]
+                },
+                'communication': {
+                    title: 'Comunicação Assertiva',
+                    lessons: [
+                        {title: 'Fundamentos da comunicação', completed: false},
+                        {title: 'Expressando suas necessidades', completed: false},
+                        {title: 'Feedback construtivo', completed: false},
+                        {title: 'Mediação de conflitos', completed: false},
+                        {title: 'Apresentações eficazes', completed: false}
+                    ]
+                }
+            };
+
+            // Open modal with track lessons
+            trackButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const trackId = this.getAttribute('data-track');
+                    const track = tracks[trackId];
+                    
+                    modalTitle.textContent = track.title;
+                    
+                    // Clear previous lessons
+                    const lessonList = document.getElementById('lesson-list');
+                    lessonList.innerHTML = '';
+                    
+                    // Add new lessons
+                    track.lessons.forEach((lesson, index) => {
+                        const lessonItem = document.createElement('div');
+                        lessonItem.className = `lesson-item ${lesson.completed ? 'completed' : ''} ${index > 0 && !track.lessons[index-1].completed ? 'locked' : ''}`;
+                        
+                        const lessonTitle = document.createElement('span');
+                        lessonTitle.textContent = `${index + 1}. ${lesson.title}`;
+                        
+                        const lessonStatus = document.createElement('div');
+                        lessonStatus.className = 'lesson-status';
+                        
+                        if (lesson.completed) {
+                            lessonStatus.textContent = '✓';
+                        } else if (index > 0 && !track.lessons[index-1].completed) {
+                            lessonStatus.textContent = '🔒';
+                        } else {
+                            lessonStatus.textContent = index + 1;
+                        }
+                        
+                        lessonItem.appendChild(lessonTitle);
+                        lessonItem.appendChild(lessonStatus);
+                        lessonList.appendChild(lessonItem);
+                    });
+                    
+                    modal.style.display = 'flex';
+                });
+            });
+
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // Close when clicking outside modal
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Start learning button
+            document.getElementById('start-learning').addEventListener('click', function() {
+                const firstTrack = document.querySelector('.track-start');
+                if (firstTrack) {
+                    firstTrack.click();
+                }
+            });
+
+            // Update profile progress animation
+            setTimeout(() => {
+                document.querySelector('.level-progress-fill').style.width = '45%';
+                document.querySelectorAll('.progress-fill').forEach(fill => {
+                    const width = fill.style.width;
+                    fill.style.width = '0';
+                    setTimeout(() => {
+                        fill.style.width = width;
+                    }, 100);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
+
